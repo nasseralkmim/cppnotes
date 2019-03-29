@@ -1,0 +1,159 @@
+* Introduction
+This is a series of my own notes on C++.
+I'm using =clang= as compiler on my windows machine.
+Emacs is my editor of choice for editing C++ code with lsp-mode for IDE like features.
+My main reference is the 2014 edition of Stroustrup excellent book "Programming principles and practice using C++"
+
+This text is written in org-mode, a major mode of emacs, which enables editing text and running code in the same document.
+I think this is ideal for an optimized learning experience since we can express ideas and concepts at same time we practice with the programming language.
+* Hello world
+
+#+BEGIN_SRC C++
+#include <iostream>
+using namespace std;		// avoid the need to write std::
+
+int main(){
+cout << "Hello World";
+}
+#+END_SRC
+
+#+RESULTS:
+: Hello World
+
+* Declaring variables
+
+#+BEGIN_SRC C++
+#include <iostream>
+
+int main(){
+    int x, y;
+    x = 10;
+    y = 2.1;			// not integer
+    std::cout << x << " and " << y << " and ";
+    float z;
+    z = x / 3.;
+    std::cout << z;
+}
+#+END_SRC
+
+#+RESULTS:
+: 10 and 2 and 3.33333
+
+* Functions
+
+They have four parts:
+1. return type (=int= for integer)
+2. name (=main=)
+3. parameter list in =()=
+4. function body in ={}=
+ 
+#+BEGIN_SRC C++
+int main(){
+return 0;
+}
+#+END_SRC
+* Inputs
+#+BEGIN_SRC C++
+#include<iostream>
+#include<string>
+using namespace std;		// avoid the need to write std::
+
+int main(){
+    cout << "Type your name: ";
+    string name;
+    cin >> name;
+}
+#+END_SRC
+
+#+RESULTS:
+: Type your name:
+
+* Vectors
+*** Introduction
+#+BEGIN_SRC C++
+#include <iostream>
+#include <vector>
+int main(){
+    std::vector<int> v(3); 		// declares the vector v size 3
+    std::cout << "Size: " << v.size();
+    v[1] = 120;
+    std::cout << "\n Vector first entry: " << v[1];
+}
+
+#+END_SRC
+
+#+RESULTS:
+| Size:  |     3 |        |     |
+| Vector | first | entry: | 120 |
+*** ISO standards C++
+#+BEGIN_SRC C++
+#include <iostream>
+#include <vector>
+int main(){
+    std::vector<int> v1;
+    std::vector<int> v2{v1}; 	// C++ 14 style copy
+    std::cout << v1.size() << v2.size();
+}
+#+END_SRC
+
+#+RESULTS:
+: 0
+
+* OOP
+*** Topics
+1. data members
+2. encapsulation, namespace, struct, nested types
+3. constructors
+4. aggregation and inheritance
+5. pointer this
+6. exceptions, throw, try, catch
+* Test driven development
+* Templates
+*** Topics
+1. what are templates
+*** What are templates?
+It is a C++ tool that allows the definition of functions and classes in which the data types are parameters.
+*** Example
+This example is from a paper "Using C++ templates to implement finite element classes" by Marco L. Bittencourt.
+We can see that the function works for integers and floats.
+#+BEGIN_SRC C++
+#include<iostream>
+using namespace std;
+template<class Type>		// defines the template with a parameter defined 
+
+Type min(Type a, Type b){
+    return a < b ? a : b;
+}
+
+int main(){
+    cout << min(10, 20);
+    cout << min(10.0, 20.0);
+    return 0;
+}
+ 
+#+END_SRC
+
+#+RESULTS:
+: 1010
+
+* Multithreadring
+* Questions and answers
+*** What is #include?
+It is a directive that instructs the computer to make a file available.
+It includes external libraries, as if the content of the included files is inserted.
+External libraries are called /header files/ and have the suffix =.h=.
+*** What is the operator >>?
+Is an input operation, "get from" and is sensitive to type.
+*** what is std::cout?
+It is the standard output stream, "see-out".
+*** What is user define type?
+Objects
+*** Is the =main= function required?
+Yes, every C++ program must have a main function.
+*** Why return 0?
+In some Unix/Linux systems it uses the 0 as a form of checking weather the program executed correctly.
+*** What is a compile-time error?
+An error fund by the compiler.
+*** What is an object? and a variable?
+It is a region of the memory with a /type/ which specifies the information that can be placed in it.
+A variable is a named object.
