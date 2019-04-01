@@ -22,6 +22,9 @@ cout << "Hello World";
 
 * Declaring variables
 
+Initialization gives a type and a value to a variable.
+Assignment changes the value.
+
 #+BEGIN_SRC C++
 #include <iostream>
 
@@ -39,6 +42,35 @@ int main(){
 #+RESULTS:
 : 10 and 2 and 3.33333
 
+* For Loops
+
+Execute the body with i starting from 0 incrementing i after each execution until we reach 10.
+Note that =++i= will increment the value of =i= and return that whereas =i++= will return the value of =i= then increment it.
+This because =++= before is a pre increment and =++= after a post increment.
+
+#+BEGIN_SRC C++
+#include <iostream>
+using namespace std;
+
+int main(){
+    for (int i=0; i<10; ++i){
+	cout << i << '\t' << i * i << '\n';
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+| 0 |  0 |
+| 1 |  1 |
+| 2 |  4 |
+| 3 |  9 |
+| 4 | 16 |
+| 5 | 25 |
+| 6 | 36 |
+| 7 | 49 |
+| 8 | 64 |
+| 9 | 81 |
+
 * Functions
 
 They have four parts:
@@ -52,7 +84,9 @@ int main(){
 return 0;
 }
 #+END_SRC
+
 * Inputs
+
 #+BEGIN_SRC C++
 #include<iostream>
 #include<string>
@@ -67,6 +101,64 @@ int main(){
 
 #+RESULTS:
 : Type your name:
+
+* Switches
+
+#+BEGIN_SRC C++ :cmdline 2
+#include <iostream>	
+#include <string>
+using namespace std;
+
+int main() {		
+  char unit = 'a';
+  double length = 1;
+  cout << "Enter a length and unit (c or i): ";
+  cin >> length >> unit;
+  switch (unit) {
+  case 'i':
+    cout << length << "in";
+    break; // each case must end with break
+  case 'c':
+    cout << length << "cm";
+    break;
+  default:
+    cout << length << "sorry";
+    break;
+  }
+}
+#+END_SRC
+
+#+RESULTS:
+: Enter a length and unit (c or i): 1sorry
+
+* Operations
+
+Observations:
+1. =sqrt()= comes from the standard library
+2. for strings =+= means concatenation
+
+#+BEGIN_SRC C++
+#include <iostream>
+#include <string>
+using namespace std;
+int main(){
+    double n = 2.1;
+    cout << n * n
+    <<"\n" << n / n
+    <<"\n" << sqrt(n);
+    string name1 = "Nasser", name2 = "Alkmim";
+    cout << "\n" << name1 << name2;
+    cout << "\n" << name1 + name2;
+}
+
+#+END_SRC
+
+#+RESULTS:
+|         4.41 |
+|            1 |
+|      1.44914 |
+| NasserAlkmim |
+| NasserAlkmim |
 
 * Vectors
 *** Introduction
@@ -116,6 +208,7 @@ It is a C++ tool that allows the definition of functions and classes in which th
 *** Example
 This example is from a paper "Using C++ templates to implement finite element classes" by Marco L. Bittencourt.
 We can see that the function works for integers and floats.
+
 #+BEGIN_SRC C++
 #include<iostream>
 using namespace std;
@@ -136,8 +229,19 @@ int main(){
 #+RESULTS:
 : 1010
 
-* Multithreadring
 * Questions and answers
+*** What is a type? and an object? a value? a variable?
+A type defines a set of:
+1. possible values for an object
+2. operation for an object
+
+An object is some memory that holds a value of a given type.
+
+A value is a set of bits in memory interprected according to type.
+
+A variable is a names object.
+*** What is a bit?
+A unit of computer memory that can hold the value of 0 or 1.
 *** What is #include?
 It is a directive that instructs the computer to make a file available.
 It includes external libraries, as if the content of the included files is inserted.
@@ -146,8 +250,7 @@ External libraries are called /header files/ and have the suffix =.h=.
 Is an input operation, "get from" and is sensitive to type.
 *** what is std::cout?
 It is the standard output stream, "see-out".
-*** What is user define type?
-Objects
+It comes from the iostream library which save us from having to directly deal with hardware input/output ports.
 *** Is the =main= function required?
 Yes, every C++ program must have a main function.
 *** Why return 0?
@@ -157,3 +260,10 @@ An error fund by the compiler.
 *** What is an object? and a variable?
 It is a region of the memory with a /type/ which specifies the information that can be placed in it.
 A variable is a named object.
+*** Whats is the difference between Initialization and assignment?
+Initialization gives a variable an initial value whereas assignment gives a variable a new value.
+*** Why should you always initializa a variable?
+In order to avoid problems such as using a variable beforce it is initialized.
+Using a variable before it has been initialized is no type-safe.
+*** What does =++var= do?
+Increments the variable value by 1, same as =var = var + 1=.
