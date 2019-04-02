@@ -268,11 +268,13 @@ int main(){
 #+END_SRC
 
 #+RESULTS:
-: 4.41
-: 1
-: 1.44914
-: NasserAlkmim
-: NasserAlkmim
+#+BEGIN_SRC org
+4.41
+1
+1.44914
+NasserAlkmim
+NasserAlkmim
+#+END_SRC
 
 * OOP
 *** Topics
