@@ -48,7 +48,7 @@ Execute the body with i starting from 0 incrementing i after each execution unti
 Note that =++i= will increment the value of =i= and return that whereas =i++= will return the value of =i= then increment it.
 This because =++= before is a pre increment and =++= after a post increment.
 
-#+BEGIN_SRC C++
+#+BEGIN_SRC C++ :results output pp
 #include <iostream>
 using namespace std;
 
@@ -60,30 +60,145 @@ int main(){
 #+END_SRC
 
 #+RESULTS:
-| 0 |  0 |
-| 1 |  1 |
-| 2 |  4 |
-| 3 |  9 |
-| 4 | 16 |
-| 5 | 25 |
-| 6 | 36 |
-| 7 | 49 |
-| 8 | 64 |
-| 9 | 81 |
+#+begin_example
+0	0
+1	1
+2	4
+3	9
+4	16
+5	25
+6	36
+7	49
+8	64
+9	81
+#+end_example
 
 * Functions
-
+*** Sintaxe
 They have four parts:
 1. return type (=int= for integer)
 2. name (=main=)
 3. parameter list in =()=
 4. function body in ={}=
+
  
 #+BEGIN_SRC C++
 int main(){
-return 0;
+    return 0;
 }
 #+END_SRC
+
+#+RESULTS:
+
+*** Why use functions?
+
+Each function should perform a *single action*. There are many advantages to that, namely:
+1. Easier to test;
+2. Easier to understand the code;
+3. Easier to reuse code.
+
+*** Difference between function definition and function declaration
+
+A function definition is simply the function type, its identifier and its parameter list.
+
+#+BEGIN_SRC C++
+int func(int arg1);
+#+END_SRC
+
+#+RESULTS:
+
+This is usefull because we do not have to look at the function body (implementation), we just need to know how to use the function.
+What are the functions arguments and what is the output?
+
+* Vectors
+*** How to initialize
+
+Notes:
+1. Index start at 0
+2. When defining a vector we need to specify the type of its elements with =<int>.=
+3. A vector accepts only element with the same type.
+4. You *can not* refer to a nonexistent element of a vector.
+
+#+BEGIN_SRC C++
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+int main(){ 
+  vector<int> v = {5, 2, 0, 9};	// vector with 4 initial elements
+  cout << v.size() << endl;
+  vector<string> names(10);	// vector with predefined size
+  cout << names.size();
+    }
+#+END_SRC
+
+#+RESULTS:
+: 4
+: 10
+
+*** Traversing a vector
+
+In order to print the vector we need to loop over its elements,
+
+#+BEGIN_SRC C++
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+void printv(vector<int> v){
+  for (int i=0; i<v.size(); ++i){
+    cout << v[i] << endl;
+  }
+}
+// range for loop
+void printv2(vector<int> v){
+  for (int i : v){		// a cleaner way of looping over array
+    cout << v[i] << endl;	// for each i in v
+  }
+}
+
+int main(){
+  vector<int> v = {1, 3, 4, 5};
+  printv(v);
+  printv2(v);
+}
+#+END_SRC
+
+#+RESULTS:
+: 1
+: 3
+: 4
+: 5
+: 3
+: 5
+: 0
+: 0
+
+*** Growing a vector
+
+#+BEGIN_SRC C++ :results pp
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+double mean(vector<double> v){
+  double sum=0;
+  for (int x: v) sum += x;
+  return sum / v.size();
+}
+
+int main(){
+  vector<double> v={2., 3., 4., 5.2};
+  for (int x : v) cout << x << ", ";
+  cout << "The mean value: " << mean(v);
+}
+#+END_SRC
+
+#+RESULTS:
+: 2, 3, 4, 5, The mean value: 3.5
 
 * Inputs
 
@@ -150,46 +265,14 @@ int main(){
     cout << "\n" << name1 << name2;
     cout << "\n" << name1 + name2;
 }
-
 #+END_SRC
 
 #+RESULTS:
-|         4.41 |
-|            1 |
-|      1.44914 |
-| NasserAlkmim |
-| NasserAlkmim |
-
-* Vectors
-*** Introduction
-#+BEGIN_SRC C++
-#include <iostream>
-#include <vector>
-int main(){
-    std::vector<int> v(3); 		// declares the vector v size 3
-    std::cout << "Size: " << v.size();
-    v[1] = 120;
-    std::cout << "\n Vector first entry: " << v[1];
-}
-
-#+END_SRC
-
-#+RESULTS:
-| Size:  |     3 |        |     |
-| Vector | first | entry: | 120 |
-*** ISO standards C++
-#+BEGIN_SRC C++
-#include <iostream>
-#include <vector>
-int main(){
-    std::vector<int> v1;
-    std::vector<int> v2{v1}; 	// C++ 14 style copy
-    std::cout << v1.size() << v2.size();
-}
-#+END_SRC
-
-#+RESULTS:
-: 0
+: 4.41
+: 1
+: 1.44914
+: NasserAlkmim
+: NasserAlkmim
 
 * OOP
 *** Topics
@@ -199,6 +282,8 @@ int main(){
 4. aggregation and inheritance
 5. pointer this
 6. exceptions, throw, try, catch
+*** Public and private
+Public makes the functions avaible to main.
 * Test driven development
 * Templates
 *** Topics
